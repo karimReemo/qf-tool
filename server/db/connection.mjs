@@ -1,23 +1,16 @@
 import { MongoClient } from "mongodb";
-import "express-async-errors";
 
 const connectionString = process.env.ATLAS_URI || "";
 
 const client = new MongoClient(connectionString);
 
 let conn;
-let db;
-
-async function main() {
-  try {
-    conn = await client.connect();
-    db = conn.db("testingDB");
-
-    //   await conn.close();
-  } catch (error) {
-    console.error("Error:", error);
-  }
+try {
+  conn = await client.connect();
+} catch(e) {
+  console.error(e);
 }
-main();
+
+let db = conn.db("testingDB");
 
 export default db;
