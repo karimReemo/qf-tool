@@ -13,10 +13,17 @@
     "@emotion/babel-plugin": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/league-gothic": "^5.0.8",
     "@fontsource/roboto": "^5.0.8",
-    "@mui/material": "^5.14.6",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.9",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0",
+    "sort-by": "^1.2.0",
+    "typescript-plugin-styled-components": "^3.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

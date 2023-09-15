@@ -1,13 +1,9 @@
 
 import { useState } from 'react'
-
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import { useTheme } from '@mui/material/styles';
 
 
 
@@ -17,6 +13,7 @@ function App() {
 
 
   const [count, setCount] = useState(0)
+  const theme = useTheme()
 
   return (
     <>
@@ -29,7 +26,7 @@ function App() {
         </a>
       </div>
       <h1   css={{
-      backgroundColor: 'hotpink',
+      backgroundColor: theme.palette.primary.main ,
       '&:hover': {
         color: 'lightgreen'
       }
