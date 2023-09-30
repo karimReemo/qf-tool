@@ -8,6 +8,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import LandingPage from "./routes/LandingPage/LandingPage.tsx";
 import ErrorPage from "./global/ErrorPage.tsx";
 import Root from "./routes/Root.tsx";
+import LoadingPage from "./routes/LoadingPage/LoadingPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "result/:resultId",
-        element: <p>Results Page</p>,
+        element: <LoadingPage/>,
       },
     ],
   },

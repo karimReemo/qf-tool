@@ -1,58 +1,65 @@
-import { Button, Grid, Stack, TextField, css, useTheme } from "@mui/material";
+import { Button, Grid, TextField, css } from "@mui/material";
 import * as React from "react";
 import { landingPageHeaderStrings } from "../../../utils/constants";
+import { useNavigate } from "react-router-dom";
+import { mq, textfieldPrimaryStyle } from "../../../assets/global-styles";
 
 interface ISearchSectionProps {}
 
-const SearchSection: React.FunctionComponent<ISearchSectionProps> = (props) => {
-  const theme = useTheme();
+const SearchSection: React.FunctionComponent<ISearchSectionProps> = () => {
+  let navigate = useNavigate();
 
-  const searchBarStyle = css`
-    & label.Mui-focused {
-      color: ${theme.palette.primary.dark};
-    }
+  const rootStyle = css`
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 90%;
+  `;
+
+  const textfieldInputStyle = css`
+    ${textfieldPrimaryStyle}
     & .MuiOutlinedInput-root {
-      & fieldset {
-        border: 3px solid rgba(51, 51, 153, 0.5);
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      }
-      &:hover fieldset: {
-        border-color: rgba(51, 51, 153, 0.5);
-      }
-      &.Mui-focused fieldset {
-        border-color: rgba(51, 51, 153, 0.5);
+      height: 62px;
+      ${mq["xl"]} {
+        height: 56px;
       }
     }
   `;
-
   const buttonStyle = css`
     height: 100%;
-    font-size: 24px;
+    font-size: 1.5rem;
   `;
 
   return (
     <Grid
+      css={rootStyle}
       marginTop={2}
       container
-      maxWidth={"90%"}
       spacing={2}
       justifyContent={"center"}
-      marginLeft={'auto'}
-      marginRight={'auto'}
-
     >
       <Grid item xs={9}>
         <TextField
           fullWidth
-          css={searchBarStyle}
+          css={textfieldInputStyle}
           id="outlined-basic"
           label={landingPageHeaderStrings.searchBarPlaceholder}
           variant="outlined"
+          // inputProps={{
+          //   style: {
+          //     height: "32px",
+          //     fontSize: "1.3em",
+          //   },
+          // }}
         />
       </Grid>
 
       <Grid item xs={3}>
-        <Button variant="contained" fullWidth size="large" css={buttonStyle}>
+        <Button
+          variant="contained"
+          fullWidth
+          css={buttonStyle}
+          onClick={() => navigate("result/anyUUid")}
+        >
           {landingPageHeaderStrings.testButton}
         </Button>
       </Grid>

@@ -1,0 +1,1078 @@
+{
+  "author": "Brighthub",
+  "organisation": "Brightwind",
+  "date": "2023-09-16",
+  "version": "1.2.0-2023.01",
+  "measurement_location": [
+    {
+      "name": "Grady Joinery",
+      "latitude_ddeg": 53.969409,
+      "longitude_ddeg": -8.750789,
+      "measurement_station_type_id": "mast",
+      "notes": null,
+      "update_at": "2023-06-15T07:53:43",
+      "logger_main_config": [
+        {
+          "logger_model_name": "SymphoniePlus",
+          "logger_oem_id": "NRG Systems",
+          "logger_serial_number": "428000961",
+          "logger_id": "0961",
+          "logger_name": null,
+          "date_from": "2009-12-01T17:40:00",
+          "date_to": "2012-03-09T23:50:00",
+          "encryption_pin_or_key": null,
+          "enclosure_lock_details": null,
+          "data_transfer_details": null,
+          "offset_from_utc_hrs": 0,
+          "sampling_rate_sec": 1,
+          "averaging_period_minutes": 10,
+          "timestamp_is_end_of_period": null,
+          "clock_is_auto_synced": null,
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "logger_firmware_version": null,
+          "logger_acquisition_uncertainty": null,
+          "uncertainty_k_factor": null
+        }
+      ],
+      "measurement_point": [
+        {
+          "name": "Spd1_60m270",
+          "measurement_type_id": "wind_speed",
+          "height_m": 60,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": 270,
+              "vane_dead_band_orientation_deg": null,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG ",
+              "model": "#40C",
+              "serial_number": "179500117926",
+              "sensor_type_id": "anemometer",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null,
+              "calibration": [
+                {
+                  "slope": 0.759,
+                  "offset": 0.37,
+                  "sensitivity": null,
+                  "report_file_name": "179500117926_2009-07-11.pdf",
+                  "report_link": null,
+                  "date_of_calibration": "2009-07-10",
+                  "calibration_organisation": "Otech",
+                  "place_of_calibration": null,
+                  "uncertainty_k_factor": null,
+                  "notes": "Not MEASNET calibrated.",
+                  "update_at": "2023-06-15T07:53:43",
+                  "measurement_type_id": "wind_speed",
+                  "calibration_id": null,
+                  "revision": null
+                }
+              ]
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.765,
+              "offset": 0.35,
+              "sensitivity": null,
+              "measurement_units_id": "m/s",
+              "height_m": 60,
+              "serial_number": "17926",
+              "connection_channel": "C1",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH1Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH1SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH1Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH1Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Spd2_60m180",
+          "measurement_type_id": "wind_speed",
+          "height_m": 60,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": 180,
+              "vane_dead_band_orientation_deg": null,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG Systems",
+              "model": "#40C",
+              "serial_number": "179500117925",
+              "sensor_type_id": "anemometer",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null,
+              "calibration": [
+                {
+                  "slope": 0.763,
+                  "offset": 0.34,
+                  "sensitivity": null,
+                  "report_file_name": "179500117925_2009-07-11.pdf",
+                  "report_link": null,
+                  "date_of_calibration": "2009-07-10",
+                  "calibration_organisation": "Otech",
+                  "place_of_calibration": null,
+                  "uncertainty_k_factor": null,
+                  "notes": "Not MEASNET calibrated.",
+                  "update_at": "2023-06-15T07:53:43",
+                  "measurement_type_id": "wind_speed",
+                  "calibration_id": null,
+                  "revision": null
+                }
+              ]
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.765,
+              "offset": 0.35,
+              "sensitivity": null,
+              "measurement_units_id": "m/s",
+              "height_m": 60,
+              "serial_number": "17925",
+              "connection_channel": "C2",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH2Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH2SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH2Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH2Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Spd3_50m270",
+          "measurement_type_id": "wind_speed",
+          "height_m": 50,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": 270,
+              "vane_dead_band_orientation_deg": null,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG Systems",
+              "model": "#40C",
+              "serial_number": "179500117922",
+              "sensor_type_id": "anemometer",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null,
+              "calibration": [
+                {
+                  "slope": 0.76,
+                  "offset": 0.37,
+                  "sensitivity": null,
+                  "report_file_name": "179500117922_2009-07-11.pdf",
+                  "report_link": null,
+                  "date_of_calibration": "2009-07-10",
+                  "calibration_organisation": "Otech",
+                  "place_of_calibration": null,
+                  "uncertainty_k_factor": null,
+                  "notes": "Not MEASNET calibrated.",
+                  "update_at": "2023-06-15T07:53:43",
+                  "measurement_type_id": "wind_speed",
+                  "calibration_id": null,
+                  "revision": null
+                }
+              ]
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.765,
+              "offset": 0.35,
+              "sensitivity": null,
+              "measurement_units_id": "m/s",
+              "height_m": 50,
+              "serial_number": "17922",
+              "connection_channel": "C3",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH3Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH3SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH3Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH3Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Spd4_50m180",
+          "measurement_type_id": "wind_speed",
+          "height_m": 50,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": 180,
+              "vane_dead_band_orientation_deg": null,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG Systems",
+              "model": "#40C",
+              "serial_number": "179500117921",
+              "sensor_type_id": "anemometer",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null,
+              "calibration": [
+                {
+                  "slope": 0.757,
+                  "offset": 0.36,
+                  "sensitivity": null,
+                  "report_file_name": "179500117921_2009-07-11.pdf",
+                  "report_link": null,
+                  "date_of_calibration": "2009-07-10",
+                  "calibration_organisation": "Otech",
+                  "place_of_calibration": null,
+                  "uncertainty_k_factor": null,
+                  "notes": "Not MEASNET calibrated.",
+                  "update_at": "2023-06-15T07:53:43",
+                  "measurement_type_id": "wind_speed",
+                  "calibration_id": null,
+                  "revision": null
+                }
+              ]
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.765,
+              "offset": 0.35,
+              "sensitivity": null,
+              "measurement_units_id": "m/s",
+              "height_m": 50,
+              "serial_number": "17921",
+              "connection_channel": "C4",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH4Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH4SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH4Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH4Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Spd5_40m270",
+          "measurement_type_id": "wind_speed",
+          "height_m": 40,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": 270,
+              "vane_dead_band_orientation_deg": null,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG Systems",
+              "model": "#40C",
+              "serial_number": "179500117928",
+              "sensor_type_id": "anemometer",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null,
+              "calibration": [
+                {
+                  "slope": 0.762,
+                  "offset": 0.34,
+                  "sensitivity": null,
+                  "report_file_name": "179500117928_2009-07-11.pdf",
+                  "report_link": null,
+                  "date_of_calibration": "2009-07-10",
+                  "calibration_organisation": "Otech",
+                  "place_of_calibration": null,
+                  "uncertainty_k_factor": null,
+                  "notes": "Not MEASNET calibrated.",
+                  "update_at": "2023-06-15T07:53:43",
+                  "measurement_type_id": "wind_speed",
+                  "calibration_id": null,
+                  "revision": null
+                }
+              ]
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.765,
+              "offset": 0.35,
+              "sensitivity": null,
+              "measurement_units_id": "m/s",
+              "height_m": 40,
+              "serial_number": "17928",
+              "connection_channel": "C5",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH5Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH5SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH5Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH5Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Spd6_40m180",
+          "measurement_type_id": "wind_speed",
+          "height_m": 40,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": 180,
+              "vane_dead_band_orientation_deg": null,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG Systems",
+              "model": "#40C",
+              "serial_number": "179500119923",
+              "sensor_type_id": "anemometer",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null,
+              "calibration": [
+                {
+                  "slope": 0.762,
+                  "offset": 0.3,
+                  "sensitivity": null,
+                  "report_file_name": "179500119923_2009-08-06.pdf",
+                  "report_link": null,
+                  "date_of_calibration": "2009-08-05",
+                  "calibration_organisation": "Otech",
+                  "place_of_calibration": null,
+                  "uncertainty_k_factor": null,
+                  "notes": "Not MEASNET calibrated. The logger program has serial number ending 17923 but both the Word (info_WED Grady Joinery 60m_170110.doc) and Excel (InfoPackWindMastGradyJoinery.xlsx) have serial number ending 19923. Calibration certificates were provided for both anemometers so it was assumed that 19923 was the anemometer installed on mast.",
+                  "update_at": "2023-06-15T07:53:43",
+                  "measurement_type_id": "wind_speed",
+                  "calibration_id": null,
+                  "revision": null
+                }
+              ]
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.765,
+              "offset": 0.35,
+              "sensitivity": null,
+              "measurement_units_id": "m/s",
+              "height_m": 40,
+              "serial_number": "17923",
+              "connection_channel": "C6",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH6Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH6SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH6Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH6Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dir1_58m0",
+          "measurement_type_id": "wind_direction",
+          "height_m": 58,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": 0,
+              "vane_dead_band_orientation_deg": 0,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG Systems",
+              "model": "#200P",
+              "serial_number": null,
+              "sensor_type_id": "wind_vane",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.351,
+              "offset": 0,
+              "sensitivity": null,
+              "measurement_units_id": "deg",
+              "height_m": 58,
+              "serial_number": null,
+              "connection_channel": "C7",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH7Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH7SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH7Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH7Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dir2_48m0",
+          "measurement_type_id": "wind_direction",
+          "height_m": 48,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": 0,
+              "vane_dead_band_orientation_deg": 0,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG Systems",
+              "model": "#200P",
+              "serial_number": null,
+              "sensor_type_id": "wind_vane",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null,
+              "calibration": [
+                {
+                  "slope": null,
+                  "offset": null,
+                  "sensitivity": null,
+                  "report_file_name": null,
+                  "report_link": null,
+                  "date_of_calibration": null,
+                  "calibration_organisation": null,
+                  "place_of_calibration": null,
+                  "uncertainty_k_factor": null,
+                  "notes": "Documentation says wind vane is at 30m but logger program says 48 m. We have assumed 48 m is correct.",
+                  "update_at": "2023-06-15T07:53:43",
+                  "measurement_type_id": "wind_direction",
+                  "calibration_id": null,
+                  "revision": null
+                }
+              ]
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.351,
+              "offset": 0,
+              "sensitivity": null,
+              "measurement_units_id": "deg",
+              "height_m": 48,
+              "serial_number": null,
+              "connection_channel": "C8",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH8Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH8SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH8Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH8Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tmp1_5m",
+          "measurement_type_id": "air_temperature",
+          "height_m": 5,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": null,
+              "vane_dead_band_orientation_deg": null,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": "NRG Systems",
+              "model": "#110S",
+              "serial_number": null,
+              "sensor_type_id": "thermometer",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.136,
+              "offset": -86.383,
+              "sensitivity": null,
+              "measurement_units_id": "deg_C",
+              "height_m": 5,
+              "serial_number": null,
+              "connection_channel": "C9",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH9Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH9SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH9Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH9Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "V_logger",
+          "measurement_type_id": "voltage",
+          "height_m": 5,
+          "height_reference_id": "ground_level",
+          "notes": null,
+          "update_at": "2023-06-15T07:53:43",
+          "mounting_arrangement": [
+            {
+              "mast_section_geometry_uuid": null,
+              "mounting_type_id": null,
+              "boom_orientation_deg": null,
+              "vane_dead_band_orientation_deg": null,
+              "orientation_reference_id": null,
+              "tilt_angle_deg": null,
+              "boom_oem": null,
+              "boom_model": null,
+              "upstand_height_mm": null,
+              "upstand_diameter_mm": null,
+              "boom_diameter_mm": null,
+              "boom_length_mm": null,
+              "distance_from_mast_to_sensor_mm": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43"
+            }
+          ],
+          "sensor": [
+            {
+              "oem": null,
+              "model": null,
+              "serial_number": null,
+              "sensor_type_id": "voltmeter",
+              "instrument_poi_height_mm": null,
+              "is_heated": null,
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "sensor_body_size_mm": null,
+              "classification": null,
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": null
+            }
+          ],
+          "logger_measurement_config": [
+            {
+              "slope": 0.021,
+              "offset": 0,
+              "sensitivity": null,
+              "measurement_units_id": "V",
+              "height_m": null,
+              "serial_number": null,
+              "connection_channel": "C10",
+              "date_from": "2009-12-01T17:40:00",
+              "date_to": "2012-03-09T23:50:00",
+              "notes": null,
+              "update_at": "2023-06-15T07:53:43",
+              "logger_stated_boom_orientation_deg": null,
+              "column_name": [
+                {
+                  "column_name": "CH10Avg",
+                  "statistic_type_id": "avg",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH10SD",
+                  "statistic_type_id": "sd",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH10Max",
+                  "statistic_type_id": "max",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                },
+                {
+                  "column_name": "CH10Min",
+                  "statistic_type_id": "min",
+                  "is_ignored": false,
+                  "notes": null,
+                  "update_at": "2023-06-15T07:53:43"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,3 @@
-import { useTheme } from "@mui/material/styles";
 import AppBar from "../global/AppBar";
 import * as React from "react";
 import { Outlet } from "react-router-dom";
@@ -8,25 +7,16 @@ import Footer from "../global/Footer/Footer";
 
 interface IRootProps {}
 
-const Root: React.FunctionComponent<IRootProps> = (props) => {
-  const theme = useTheme();
-
+const Root: React.FunctionComponent<IRootProps> = () => {
+  
 
   return (
-    <div
-      css={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100vw",
-        height: "100vh",
-        backgroundColor: theme.palette.background.default,
-      }}
-    >
+    <div>
       <Global styles={styles} />
 
       <AppBar />
       <Outlet />
-      <Footer/>
+      <Footer />
     </div>
   );
 };

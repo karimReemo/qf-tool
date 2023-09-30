@@ -1,14 +1,27 @@
 import * as React from "react";
 import HeaderSection from "./components/HeaderSection";
-import { Stack } from "@mui/material";
+import { Stack, useMediaQuery } from "@mui/material";
+import StepsSection from "./components/StepsSection/StepsSection";
+import QAFSection from "./components/QAFSection/QAFSection";
+import { manContentStyle, mq } from "../../assets/global-styles";
 
 interface ILandingPageProps {}
 
-const LandingPage: React.FunctionComponent<ILandingPageProps> = (props) => {
+const LandingPage: React.FunctionComponent<ILandingPageProps> = () => {
+  const xlargeScreen = useMediaQuery(mq['xxl']);
+
   return (
-    <Stack direction={"column"} spacing={24} padding={12} paddingTop={8}>
-      <HeaderSection />
-    </Stack>
+    <>
+      <Stack
+        direction={"column"}
+        gap={xlargeScreen?24:18}
+        css={manContentStyle}
+      >
+        <HeaderSection />
+        <StepsSection />
+      </Stack>
+      <QAFSection />
+    </>
   );
 };
 
