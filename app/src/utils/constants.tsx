@@ -78,8 +78,7 @@ export const loadingPageStrings = {
   copyLink: `Copy link`,
 };
 
-
-export const expectationsSectionHeader=`Here’s what to expect in your report`
+export const expectationsSectionHeader = `Here’s what to expect in your report`;
 
 export const reportExpectationsStrings = [
   {
@@ -106,5 +105,13 @@ export const reportExpectationsStrings = [
     cardTitle: "Network Payload",
     cardBody: `We'll analyze your website's data, digging into the depth of your network payload. Get ready to see how your digital weight stacks up in the online world.`,
   },
- 
 ];
+
+export const resultsPageStrings = {
+  mainTitle: "Security Analysis for:",
+  reportDate: `Report from`,
+  inDepthSectionTitle: "Report In-depth results",
+  downloadPDF: "Download as PDF",
+  highSeverity: "High Severity",
+
+};

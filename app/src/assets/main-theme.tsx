@@ -43,6 +43,11 @@ let theme = createTheme({
       fontSize: "18px",
       fontFamily: "ZawyaNormalSemiBold",
     },
+    h5: {
+      color: "#2A3342",
+      fontSize: "18px",
+      fontFamily: "ZawyaNormal",
+    },
   },
 });
 

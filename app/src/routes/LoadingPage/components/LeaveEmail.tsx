@@ -2,9 +2,13 @@ import { Button, Stack, TextField, Typography, css } from "@mui/material";
 import * as React from "react";
 import { loadingPageStrings } from "../../../utils/constants";
 import { mq, textfieldPrimaryStyle } from "../../../assets/global-styles";
+import { useNavigate } from "react-router-dom";
 
 const LeaveEmail = () => {
+  let navigate = useNavigate();
+
   const [email, setEmail] = React.useState("");
+  
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -29,7 +33,7 @@ const LeaveEmail = () => {
             label="Email"
             variant="outlined"
           />
-          <Button css={buttonStyle} variant="contained" type="submit">
+          <Button css={buttonStyle} variant="contained" type="submit"   onClick={() => navigate("/result/anyUUid/report")}>
             Notify Me
           </Button>
         </Stack>

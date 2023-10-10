@@ -9,6 +9,7 @@ import LandingPage from "./routes/LandingPage/LandingPage.tsx";
 import ErrorPage from "./global/ErrorPage.tsx";
 import Root from "./routes/Root.tsx";
 import LoadingPage from "./routes/LoadingPage/LoadingPage.tsx";
+import ResultsPage from "./routes/ResultsPage/ResultsPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,9 +21,14 @@ const router = createBrowserRouter([
         element: <LandingPage/>,
       },
       {
+        path: "result/:resultId/report",
+        element: <ResultsPage/>,
+      },
+      {
         path: "result/:resultId",
         element: <LoadingPage/>,
       },
+     
     ],
   },
 ]);

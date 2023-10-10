@@ -3,7 +3,7 @@ import HeaderSection from "./components/HeaderSection";
 import { Stack, useMediaQuery } from "@mui/material";
 import StepsSection from "./components/StepsSection/StepsSection";
 import QAFSection from "./components/QAFSection/QAFSection";
-import { manContentStyle, mq } from "../../assets/global-styles";
+import { mainContentStyle, mq } from "../../assets/global-styles";
 
 interface ILandingPageProps {}
 
@@ -15,7 +15,7 @@ const LandingPage: React.FunctionComponent<ILandingPageProps> = () => {
       <Stack
         direction={"column"}
         gap={xlargeScreen?24:18}
-        css={manContentStyle}
+        css={mainContentStyle}
       >
         <HeaderSection />
         <StepsSection />

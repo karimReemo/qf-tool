@@ -56,7 +56,7 @@ export const styles = css`
   }
 `;
 
-export const manContentStyle = css`
+export const mainContentStyle = css`
   padding: 90px 4%;
   ${mq["xl"]} {
     padding: 52px 8%;
