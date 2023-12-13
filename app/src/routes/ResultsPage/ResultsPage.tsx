@@ -19,6 +19,12 @@ const ResultsPage: React.FunctionComponent<IResultsPageProps> = (props) => {
     ],
     inDepthResults: [
       {
+        title: "Anything",
+        severity: "MEDIUM",
+        detailedDescription: `To address this issue and improve the performance and user experience of a website, 
+        it's advisable to specify the width and height attributes for all images in the HTML code.`,
+      },
+      {
         title: "Avoid enormous network payloads",
         severity: "HIGH",
         detailedDescription: `To address this issue and improve the performance and user experience of a website, 
@@ -32,6 +38,12 @@ const ResultsPage: React.FunctionComponent<IResultsPageProps> = (props) => {
       },
       {
         title: "Minimize main-thread work ",
+        severity: "LOW",
+        detailedDescription: `To address this issue and improve the performance and user experience of a website, 
+        it's advisable to specify the width and height attributes for all images in the HTML code.`,
+      },
+      {
+        title: "Pre-load images from server",
         severity: "LOW",
         detailedDescription: `To address this issue and improve the performance and user experience of a website, 
         it's advisable to specify the width and height attributes for all images in the HTML code.`,
@@ -63,5 +75,6 @@ const resultsPageRoot = css`
   background-color: #ffffff;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
+  min-height: 50vh;
 `;
 export default ResultsPage;
