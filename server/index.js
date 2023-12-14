@@ -17,14 +17,22 @@ app.get('/', (req, res) => {
 });
 
 app.get('/run', (req, res) => {
-  exec('python3 ~/SharqScan/SharqScan.py 8 fantasy.premierleague.com', (error, stdout, stderr) => {
-    if (error) {
-      res.status(500).json({ message: `Error executing command: ${error.message}` });
-      return;
-    }
+  try{
+    exec('python3 ~/SharqScan/SharqScan.py 10 fantasy.premierleague.com', (error, stdout, stderr) => {
+      if (error) {
+        console.log('error')
+        res.status(500).json({ message: `Error executing command: ${error.message}` });
+        return;
+      }
+  
+      res.status(200).json({ message: `stdout: ${stdout}/ stderr: ${stderr}` });
+    });
+  }
+  catch(err){
+    res.status(500).json({ message: `Catched error: ${err}` });
 
-    res.status(200).json({ message: `stdout: ${stdout}/ stderr: ${stderr}` });
-  });
+  }
+ 
 });
 
 app.listen(port, () => {
