@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.get('/run', (req, res) => {
   try{
-    exec('python3 ~/SharqScan/SharqScan.py 31 fantasy.premierleague.com', (error, stdout, stderr) => {
+    exec('python3 ~/SharqScan/SharqScan.py 80  sharqsec.com', (error, stdout, stderr) => {
       if (error) {
         console.log('error')
         res.status(500).json({ message: `Error executing command: ${error.message}` });
