@@ -46,12 +46,11 @@ app.get("/run-test", (req, res) => {
     // Extract domain name and TLD from the URL
     const url = new URL(website);
     const domain = url.hostname;
-    const tld = url.pathname.split(".").pop(); // Extract TLD from pathname
-    // Concatenate domain and TLD
-    const fullDomain = `${domain}.${tld}`;
+
+    console.log(domain)
 
     exec(
-      `python3 ~/SharqScan/SharqScan.py ${uuid}  ${fullDomain}`,
+      `python3 ~/SharqScan/SharqScan.py ${uuid}  ${domain}`,
       (error, stdout, stderr) => {
         if (error) {
           console.log("error");
