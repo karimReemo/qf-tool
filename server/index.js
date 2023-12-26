@@ -34,9 +34,9 @@ app.get("/run-test", (req, res) => {
     const website = req.query.website;
 
     // Validate UUID
-    if (!uuid || !validateUuid(uuid)) {
+    if (!uuid ) {
       // If the UUID is missing or invalid, return an error response
-      return res.status(400).json({ error: "Invalid or missing UUID v4" });
+      return res.status(400).json({ error: "Missing UUID" });
     }
 
     if (!website) {
