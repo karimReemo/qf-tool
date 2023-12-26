@@ -62,7 +62,7 @@ app.get("/run-test", (req, res) => {
 
         res
           .status(200)
-          .json({ message: `Successfully ran test for ${fullDomain}` });
+          .json({ message: `Successfully ran test for ${domain}` });
       }
     );
   } catch (err) {
