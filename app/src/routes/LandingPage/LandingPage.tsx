@@ -9,6 +9,7 @@ interface ILandingPageProps {}
 
 const LandingPage: React.FunctionComponent<ILandingPageProps> = () => {
   const xlargeScreen = useMediaQuery(mq['xxl']);
+  console.log("Landing render")
 
   return (
     <>

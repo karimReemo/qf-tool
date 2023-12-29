@@ -21,6 +21,7 @@ const LoadingPage: React.FunctionComponent<ILoadingPageProps> = () => {
   React.useEffect(() => {
     const runTest = async () => {
       setResultsLoading(true);
+
       const queryData = {
         uuid: query.get("uuid"),
         website: query.get("website"),
@@ -38,7 +39,7 @@ const LoadingPage: React.FunctionComponent<ILoadingPageProps> = () => {
       }
     };
 
-    runTest();
+    if(!resultsLoading)runTest();
   }, []);
 
   return (
