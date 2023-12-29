@@ -21,11 +21,11 @@ const router = createBrowserRouter([
         element: <LandingPage/>,
       },
       {
-        path: "result/:resultId/report",
+        path: "result/:resultId",
         element: <ResultsPage/>,
       },
       {
-        path: "result/:resultId",
+        path: "run-result",
         element: <LoadingPage/>,
       },
      

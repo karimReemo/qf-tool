@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const { v4: uuidv4, validate: validateUuid } = require("uuid");
 const { exec } = require("child_process");
 const pgp = require("pg-promise")();
+var cors = require('cors');
 
 const app = express();
 const port = 4000;
@@ -17,6 +18,8 @@ const db = pgp({
 });
 
 app.use(bodyParser.json());
+app.use(cors({origin: 'http://localhost:5173/'}));
+
 app.use(
   bodyParser.urlencoded({
     extended: true,

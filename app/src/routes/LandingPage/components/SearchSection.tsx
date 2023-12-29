@@ -3,11 +3,14 @@ import * as React from "react";
 import { landingPageHeaderStrings } from "../../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { mq, textfieldPrimaryStyle } from "../../../assets/global-styles";
+import axios from "axios";
+import { apiBaseURL } from "../../../utils/api";
 
 interface ISearchSectionProps {}
 
 const SearchSection: React.FunctionComponent<ISearchSectionProps> = () => {
   let navigate = useNavigate();
+  const [websiteInput, setWebsiteInput] = React.useState("");
 
   const rootStyle = css`
     margin-right: auto;
@@ -29,6 +32,14 @@ const SearchSection: React.FunctionComponent<ISearchSectionProps> = () => {
     font-size: 1.5rem;
   `;
 
+
+  const initiateTestLoading = () => {
+    // Generate a random 16-digit integer for the uuid
+    const uuid = Math.floor(10000000 + Math.random() * 90000000);
+
+    navigate(`run-result?uuid=${uuid}&website=${websiteInput}`);
+  };
+
   return (
     <Grid
       css={rootStyle}
@@ -44,12 +55,8 @@ const SearchSection: React.FunctionComponent<ISearchSectionProps> = () => {
           id="outlined-basic"
           label={landingPageHeaderStrings.searchBarPlaceholder}
           variant="outlined"
-          // inputProps={{
-          //   style: {
-          //     height: "32px",
-          //     fontSize: "1.3em",
-          //   },
-          // }}
+          onChange={(e) => setWebsiteInput(e.target.value)}
+          value={websiteInput}
         />
       </Grid>
 
@@ -58,7 +65,7 @@ const SearchSection: React.FunctionComponent<ISearchSectionProps> = () => {
           variant="contained"
           fullWidth
           css={buttonStyle}
-          onClick={() => navigate("result/anyUUid")}
+          onClick={initiateTestLoading}
         >
           {landingPageHeaderStrings.testButton}
         </Button>
