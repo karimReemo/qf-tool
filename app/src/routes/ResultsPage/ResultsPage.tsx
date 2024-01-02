@@ -7,10 +7,48 @@ import ScoresContainer from "./components/ScoresContainer";
 import Divider from "@mui/material/Divider";
 import ResultsContainer from "./components/ResultsContainer";
 import { ITestResults } from "../../utils/types";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { apiBaseURL } from "../../utils/api";
 
-interface IResultsPageProps {}
 
-const ResultsPage: React.FunctionComponent<IResultsPageProps> = (props) => {
+function useQuery() {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
+const ResultsPage= () => {
+  const [resultsLoading, setResultsLoading] = React.useState(false);
+  const [wapitiResults, setWapitiResults] = React.useState(false);
+  const [resultsLoading, setResultsLoading] = React.useState(false);
+
+
+  let query = useQuery();
+
+
+  React.useEffect(() => {
+    const runTest = async () => {
+      setResultsLoading(true);
+      try {
+        const uuid=query.get("uuid")
+        const wapitiResults = await axios.get(`${apiBaseURL}/results/wapiti/${uuid}`);
+        const sslyze = await axios.get(`${apiBaseURL}/results/sslyze/${uuid}`);
+
+        if (response.status === 200) {
+          navigate(
+            `result?uuid=${queryData.uuid}&website=${queryData.website}`
+          );
+        }
+      } catch (error) {
+        let errorType = error as AxiosError;
+      } finally {
+        setResultsLoading(false);
+      }
+    };
+
+    if (!resultsLoading) runTest();
+  }, []);
+
   const resultsMockJson:ITestResults = {
     overallScores: [
       { title: "Network Payload", score: 25 },
@@ -50,6 +88,8 @@ const ResultsPage: React.FunctionComponent<IResultsPageProps> = (props) => {
       },
     ],
   };
+
+
 
   return (
     <>

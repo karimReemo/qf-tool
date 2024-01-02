@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <LandingPage/>,
       },
       {
-        path: "result/:resultId",
+        path: "result",
         element: <ResultsPage/>,
       },
       {
@@ -34,7 +34,6 @@ const router = createBrowserRouter([
 ]);
 
 
-console.log("Main render")
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={theme}>

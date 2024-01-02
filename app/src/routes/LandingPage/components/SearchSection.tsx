@@ -36,7 +36,6 @@ const SearchSection: React.FunctionComponent<ISearchSectionProps> = () => {
   const initiateTestLoading = () => {
     // Generate a random 16-digit integer for the uuid
     const uuid = Math.floor(10000000 + Math.random() * 90000000);
-
     navigate(`run-result?uuid=${uuid}&website=${websiteInput}`);
   };
 
