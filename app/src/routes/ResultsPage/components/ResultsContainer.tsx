@@ -1,12 +1,13 @@
-import { Button, Stack, Tooltip, Typography, css, useMediaQuery } from "@mui/material";
 import * as React from "react";
+import { Button, Stack, Tooltip, Typography, css, useMediaQuery } from "@mui/material";
 import { resultsPageStrings } from "../../../utils/constants";
 import DownloadIcon from "@mui/icons-material/Download";
-import { IInDepthResult } from "../../../utils/types";
+import { ScoreDetails } from "../../../utils/types";
 import ResultAccordion from "./ResultAccordion";
 import { mq } from "../../../assets/global-styles";
+
 interface IResultsContainerProps {
-  results: IInDepthResult[];
+  results: ScoreDetails[]|undefined;
 }
 
 const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
@@ -35,7 +36,7 @@ const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
         </Button>
         </Tooltip>
       </Stack>
-      {results.map((result, index) => (
+      {results?.map((result, index) => (
         <ResultAccordion key={index} result={result} />
       ))}
     </Stack>

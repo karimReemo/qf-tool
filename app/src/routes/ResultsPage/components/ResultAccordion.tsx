@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IInDepthResult } from "../../../utils/types";
+import {  ScoreDetails } from "../../../utils/types";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -11,7 +11,7 @@ import Stack from "@mui/material/Stack";
 import { resultsPageStrings } from "../../../utils/constants";
 
 interface IResultAccordionProps {
-  result: IInDepthResult;
+  result: ScoreDetails;
 }
 
 const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
@@ -24,7 +24,7 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
     border-left: ${expanded ? `1px solid ${primaryColor}` : ""};
     height: 100px;
     ${mq["xl"]} {
-        height: 50px;
+      height: 50px;
     }
   `;
 
@@ -51,7 +51,10 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
     <div>
       <Accordion
         expanded={expanded}
-        style={{ borderRadius: 0 ,borderBottom:expanded?'1px solid #a1a1a1':''}}
+        style={{
+          borderRadius: 0,
+          borderBottom: expanded ? "1px solid #a1a1a1" : "",
+        }}
         onChange={handleChange()}
       >
         <AccordionSummary
@@ -61,10 +64,13 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
           css={accordionTitleStyle}
         >
           <Stack direction="row" alignItems={"center"}>
-            <Typography css={accordionTitleTextStyle}>
-              {result.title}
-            </Typography>
-            {result.severity === "HIGH" && (
+            <Typography css={accordionTitleTextStyle}>{result.info}</Typography>
+            {result.level === 2 && (
+              <Typography css={accordionMediumSeverityTextStyle}>
+                {resultsPageStrings.mediumSeverity}
+              </Typography>
+            )}
+            {result.level > 2 && (
               <Typography css={accordionSeverityTextStyle}>
                 {resultsPageStrings.highSeverity}
               </Typography>
@@ -72,9 +78,7 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
           </Stack>
         </AccordionSummary>
         <AccordionDetails css={accordionBodyStyle}>
-          <Typography css={accordionBodyTextStyle}>
-            {result.detailedDescription}
-          </Typography>
+          <Typography css={accordionBodyTextStyle}></Typography>
         </AccordionDetails>
       </Accordion>
     </div>
@@ -87,14 +91,19 @@ const accordionSeverityTextStyle = css`
   margin-left: 12px;
   font-size: 1em;
   ${mq["xl"]} {
-      font-size: 0.8em;
-    }
+    font-size: 0.8em;
+  }
+`;
+
+const accordionMediumSeverityTextStyle = css`
+  ${accordionSeverityTextStyle};
+  color: orange;
 `;
 
 const accordionBodyTextStyle = css`
   font-size: 1.5em;
   ${mq["xl"]} {
-      font-size: 1em;
-    }
+    font-size: 1em;
+  }
 `;
 export default ResultAccordion;

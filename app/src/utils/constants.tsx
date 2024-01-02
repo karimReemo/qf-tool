@@ -72,7 +72,7 @@ export const qafs = [
 
 export const loadingPageStrings = {
   mainTitle: "Running our tests",
-  subtitle: `Typically, our testing process takes  3 to 4 hours – not too long! Return to this page anytime from the link below`,
+  subtitle: `Typically, our testing process takes just one minute – not too long now!`,
   emailText: `Leave your email below and we will notify you once results are ready`,
   secondTitle: `Here’s what to expect in your report`,
   copyLink: `Copy link`,
@@ -113,5 +113,6 @@ export const resultsPageStrings = {
   inDepthSectionTitle: "Report In-depth results",
   downloadPDF: "Download as PDF",
   highSeverity: "High Severity",
+  mediumSeverity: "Medium Severity",
 
 };

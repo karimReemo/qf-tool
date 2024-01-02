@@ -6,30 +6,38 @@ import { loadingPageStrings } from "../../../utils/constants";
 import LinkCopier from "./LinkCopier";
 import LeaveEmail from "./LeaveEmail";
 import { mq } from "../../../assets/global-styles";
+import Lottie from "lottie-react";
+import animationData from "../../../assets/searching-animation.json";
 
 const LoadingTopSection = () => {
   const theme = useTheme();
 
   return (
     <Stack alignItems={"center"}>
-      <img css={iconStyle} src={searchIcon} alt={`searchIcon_image`} />
-      <Typography color={theme.palette.primary.main} variant="h2" css={mainText}>
+      <div>
+        <Lottie  css={animationStyle} animationData={animationData}  />
+      </div>
+      <Typography
+        color={theme.palette.primary.main}
+        variant="h2"
+        css={mainText}
+      >
         {loadingPageStrings.mainTitle}
       </Typography>
-      <Typography  textAlign={"center"} css={subTitle}>
+      <Typography textAlign={"center"} css={subTitle}>
         {loadingPageStrings.subtitle}
       </Typography>
-      <LinkCopier />
+      {/* <LinkCopier />
       <Typography css={orTextStyle}>OR</Typography>
-      <LeaveEmail />
+      <LeaveEmail /> */}
     </Stack>
   );
 };
 
-const iconStyle = css`
-  height: 250px;
+const animationStyle = css`
+  height: 220px;
   ${mq["xl"]} {
-    height: 160px;
+    height: 240px;
   }
 `;
 
@@ -46,7 +54,6 @@ const subTitle = css`
   ${mq["xl"]} {
     font-size: 1.2em;
     width: 60%;
-
   }
 `;
 
@@ -56,13 +63,11 @@ const orTextStyle = css`
   margin: 16px 0px;
   text-align: center;
   width: 65%;
-  
+
   font-size: larger;
   font-weight: bold;
   ${mq["xl"]} {
     width: 56%;
-
-
   }
   &:before {
     content: "";

@@ -1,6 +1,6 @@
 export interface IScore {
   title: string;
-  score: number;
+  score: number|undefined;
 }
 
 export interface IInDepthResult {
@@ -15,26 +15,17 @@ export interface ITestResults {
 }
 
 
-export interface IWapitiResults {
-  result: Array<{
-    info: string;
-    level: number;
-  }>;
+export interface ScoreDetails {
+  info: string;
+  level: number;
 }
 
-export interface ISslyzeResults {
-  record: {
-    uuid: number;
-    ssl2: boolean;
-    ssl3: boolean;
-    tls0: boolean;
-    tls1: boolean;
-    tls2: boolean;
-    tls3: boolean;
-    heartbleed: boolean;
-    dos: boolean;
-    hsts: boolean;
-  };
+export interface IScoreResponse {
+  "connection-score": number;
+  "website-score": number;
+  "average-score": number;
+  details: ScoreDetails[];
 }
+
 
 
