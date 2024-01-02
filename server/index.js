@@ -18,7 +18,7 @@ const db = pgp({
 });
 
 app.use(bodyParser.json());
-app.use(cors({ origin: ["http://localhost:5173",'https://wonderful-pastelito-6bbbe2.netlify.app'] }));
+app.use(cors());
 
 app.use(
   bodyParser.urlencoded({
