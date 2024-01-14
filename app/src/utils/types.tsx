@@ -16,11 +16,14 @@ export interface ITestResults {
 
 
 export interface ScoreDetails {
-  info: string;
+  info: string[];
+  category:string;
+  parentCategory:string;
   level: number;
 }
 
 export interface IScoreResponse {
+  website:string
   "connection-score": number;
   "website-score": number;
   "average-score": number;

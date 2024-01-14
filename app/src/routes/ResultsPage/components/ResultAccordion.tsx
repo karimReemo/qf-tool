@@ -1,5 +1,5 @@
 import * as React from "react";
-import {  ScoreDetails } from "../../../utils/types";
+import { ScoreDetails } from "../../../utils/types";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -26,6 +26,7 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
     ${mq["xl"]} {
       height: 50px;
     }
+  
   `;
 
   const accordionTitleTextStyle = css`
@@ -35,10 +36,12 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
     ${mq["xl"]} {
       font-size: 1.1em;
     }
+    
   `;
 
   const accordionBodyStyle = css`
     background-color: ${expanded ? "#EBEBEB" : "white"};
+    padding-left:0;
   `;
 
   const handleChange =
@@ -64,7 +67,9 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
           css={accordionTitleStyle}
         >
           <Stack direction="row" alignItems={"center"}>
-            <Typography css={accordionTitleTextStyle}>{result.info}</Typography>
+            <Typography css={accordionTitleTextStyle}>
+              {result.category}
+            </Typography>
             {result.level === 2 && (
               <Typography css={accordionMediumSeverityTextStyle}>
                 {resultsPageStrings.mediumSeverity}
@@ -78,7 +83,11 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
           </Stack>
         </AccordionSummary>
         <AccordionDetails css={accordionBodyStyle}>
-          <Typography css={accordionBodyTextStyle}></Typography>
+          <ul css={listStyle}>
+            {result.info.map((item, index) => (
+              <li key={index} style={{ marginBottom: '4px' }}><Typography css={accordionBodyTextStyle}>{item}</Typography></li>
+            ))}
+          </ul>
         </AccordionDetails>
       </Accordion>
     </div>
@@ -106,4 +115,9 @@ const accordionBodyTextStyle = css`
     font-size: 1em;
   }
 `;
+
+const listStyle= css`
+  margin:0;
+  margin-left: -6px;
+`
 export default ResultAccordion;

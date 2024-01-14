@@ -8,9 +8,11 @@ import Typography from "@mui/material/Typography/Typography";
 import { resultsPageStrings } from "../../../utils/constants";
 import { mq } from "../../../assets/global-styles";
 
-interface IResultsHeaderProps {}
+interface IResultsHeaderProps {
+  website:string
+}
 
-const ResultsHeader: React.FunctionComponent<IResultsHeaderProps> = (props) => {
+const ResultsHeader: React.FunctionComponent<IResultsHeaderProps> = ({website}) => {
   return (
     <Stack justifyContent={'space-between'} css={rootStyle} direction={"row"} >
       <Stack justifyContent={"center"} gap={1}>
@@ -18,7 +20,7 @@ const ResultsHeader: React.FunctionComponent<IResultsHeaderProps> = (props) => {
           {resultsPageStrings.mainTitle}
         </Typography>
         <Typography css={websiteTextStyle} variant="h2">
-          https://sharqsec.com/
+         {website}
         </Typography>
         <Typography css={dateStyle}>{`${
           resultsPageStrings.reportDate

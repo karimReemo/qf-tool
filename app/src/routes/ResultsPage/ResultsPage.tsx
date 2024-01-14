@@ -53,7 +53,7 @@ const ResultsPage = () => {
   if (!testResults) return null;
   return (
     <>
-      <ResultsHeader />
+      <ResultsHeader  website={testResults.website}/>
       <Stack direction={"column"} gap={3} css={resultsPageRoot}>
         <ScoresContainer scores={overallScores} />
         <Divider />
