@@ -12,18 +12,41 @@ import DownloadIcon from "@mui/icons-material/Download";
 import { ScoreDetails } from "../../../utils/types";
 import ResultAccordion from "./ResultAccordion";
 import { mq, primaryColor } from "../../../assets/global-styles";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 interface IResultsContainerProps {
   results: ScoreDetails[] | undefined;
+}
+
+interface ICategoryDef {
+  category: string;
+  categoryInfo?: string;
 }
 
 const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
   results,
 }) => {
   const xlargeScreen = useMediaQuery(mq["xl"]);
-  const allCategories = results?.map((result) => result.parentCategory);
-  const uniqueCategories = Array.from(new Set(allCategories));
+  const allCategories: ICategoryDef[] | undefined = results?.map((result) => {
+    return { category: result.category, categoryInfo: result.categoryInfo };
+  });
+  // Create a unique set of categories based on the category property
+  const uniqueCategories: ICategoryDef[] | undefined = allCategories?.reduce(
+    (unique, currentCategory) => {
+      const exists = unique.some(
+        //@ts-ignore
+        (category) => category.category === currentCategory.category
+      );
 
+      if (!exists) {
+        //@ts-ignore
+        unique.push(currentCategory);
+      }
+
+      return unique;
+    },
+    []
+  );
   return (
     <Stack css={rootStyle}>
       <Stack
@@ -48,12 +71,15 @@ const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
       {uniqueCategories?.map((category, index) => (
         <div css={{ marginBottom: "2em" }}>
           <div css={categoryContainerStyle}>
-            <Typography css={categoryStyle}>{category}</Typography>
+            <Typography css={categoryStyle}>{category.category}</Typography>
+            <Tooltip title={`${category.categoryInfo}`} arrow>
+              <InfoOutlinedIcon />
+            </Tooltip>
           </div>
 
           {results
             ?.filter(
-              (filteredResult) => filteredResult.parentCategory === category
+              (filteredResult) => filteredResult.category === category.category
             )
             .map((result) => (
               <ResultAccordion key={index} result={result} />
@@ -90,7 +116,10 @@ const categoryContainerStyle = css`
   padding: 4px 8px;
 
   border-radius: 4px;
-  display: inline-block;
+  display: flex;
+  flex-direction: "row";
+  gap: 12px;
+  width: fit-content;
   color: #ffffff;
 `;
 

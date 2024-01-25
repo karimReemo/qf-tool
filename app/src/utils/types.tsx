@@ -17,9 +17,11 @@ export interface ITestResults {
 
 export interface ScoreDetails {
   info: string[];
+  title:string;
   category:string;
-  parentCategory:string;
   level: number;
+  categoryInfo?:string;
+
 }
 
 export interface IScoreResponse {

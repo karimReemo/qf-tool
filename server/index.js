@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { v4: uuidv4, validate: validateUuid } = require("uuid");
 const { exec } = require("child_process");
+const connectionVulnInfo = require("./sslyzeVulnInfo");
+const wapitiVulnInfo=require("./wapitiVulnInfo")
 const pgp = require("pg-promise")();
 var cors = require("cors");
 
@@ -34,7 +36,7 @@ app.post("/run-test", (req, res) => {
   try {
     // Access query parameters
     const uuid = req.query.uuid;
-    const website = req.query.website;
+    let website = req.query.website;
 
     // Validate UUID
     if (!uuid) {
@@ -46,9 +48,16 @@ app.post("/run-test", (req, res) => {
       // If the Website is missing or invalid, return an error response
       return res.status(400).json({ error: "Missing website" });
     }
+
+    if (!website.startsWith("http://") && !website.startsWith("https://")) {
+      // If it doesn't have a scheme, assume 'https://' and add it
+      website = "https://" + website;
+    }
     // Extract domain name and TLD from the URL
     const url = new URL(website);
     const domain = url.hostname;
+
+    console.log(domain)
 
     exec(
       `python3 ~/SharqScan/SharqScan.py ${uuid}  ${domain}`,
@@ -96,18 +105,20 @@ app.get("/results/:uuid", async (req, res) => {
 });
 
 function parseResults(ssylyzeResults, wapitiResults) {
-  const parsedWapiti = parseWapitiResults(wapitiResults);
+  const details = parseWapitiResults(wapitiResults);
 
   const connectionScore = getConnectionScore(ssylyzeResults);
 
-  const websiteSecurityScore = getWebsiteSecurityScore(parsedWapiti);
+  addConnectionVulnToDetails(details, ssylyzeResults);
+
+  const websiteSecurityScore = getWebsiteSecurityScore(details);
 
   return {
     website: extractWebsiteFromResult(wapitiResults),
     "connection-score": connectionScore,
     "website-score": websiteSecurityScore,
     "average-score": (connectionScore + websiteSecurityScore) / 2,
-    details: parsedWapiti,
+    details,
   };
 }
 
@@ -115,16 +126,18 @@ function parseWapitiResults(data) {
   try {
     // Parse the data if it's a string
     const parsedData = typeof data === "string" ? JSON.parse(data) : data;
+
     // Check if "record" exists and has the expected structure
-    if (parsedData && parsedData && parsedData.vulns) {
-      // Extract "info" and "level" from each vulnerability, and add their category.
-      const extractedInfoLevel = parsedData.vulns.reduce((acc, vuln) => {
-        if (Array.isArray(vuln)) {
-          vuln.forEach(({ info, level }) => {
+    if (  parsedData && parsedData.vulns.vulnerabilities) {
+      let vulnsObject=parsedData.vulns.vulnerabilities
+      // Extract "info" and "level" from each vulnerability, and add their title.
+      const extractedInfoLevel =Object.entries(vulnsObject).reduce((acc, [vulnCategory,vulnInfo]) => {
+        if (Array.isArray(vulnInfo)) {
+          vulnInfo.forEach(({ info, level }) => {
             if (info !== undefined && level !== undefined) {
-              //The first word of the info is used as the category
-              const category = info.split(" ")[0];
-              acc.push({ info, level, category });
+              //The first word of the info is used as the title
+              const title = info.split(" ")[0];
+              acc.push({ info, level, title,category:vulnCategory,categoryInfo:wapitiVulnInfo[vulnCategory]});
             }
           });
         }
@@ -153,18 +166,18 @@ function getConnectionScore(ssylyzeResults) {
 
 function getWebsiteSecurityScore(parsedWapiti) {
   if (parsedWapiti.length > 9) return 0;
-  return 100 - parsedWapiti.length * 10;
+  return 100 - parsedWapiti.length * 5;
 }
 
-/**Function that searches through the details and combine the vuln that have the same category */
+/**Function that searches through the details and combine the vuln that have the same title */
 function combineCategories(detailsArray) {
   let combinedCategories = [];
   for (let i = 0; i < detailsArray.length; i++) {
-    const category = detailsArray[i].category;
+    const title = detailsArray[i].title;
     const info = detailsArray[i].info;
     const level = detailsArray[i].level;
-    const parentCategory = getParentCategory(category);
-
+    const category = detailsArray[i].category;
+    const categoryInfo=detailsArray[i].categoryInfo
 
     const combinedCategoryVuln = combinedCategories.find(
       (vulnDetail) => vulnDetail.category == category
@@ -174,16 +187,17 @@ function combineCategories(detailsArray) {
     else
       combinedCategories.push({
         info: [info],
+        title,
         category,
-        parentCategory,
         level,
+        categoryInfo
       });
   }
   return reorderDetails(combinedCategories);
 }
 
-function getParentCategory(category) {
-  switch (category) {
+function getParentCategory(title) {
+  switch (title) {
     case "CSP":
       return "Security";
     case "X-XSS-Protection":
@@ -194,7 +208,10 @@ function getParentCategory(category) {
 }
 
 function extractWebsiteFromResult(data) {
-  for (const resultArray of data.vulns) {
+  let vulnsObject=data.vulns.vulnerabilities
+  const extractedVulns =Object.values(vulnsObject)
+
+  for (const resultArray of extractedVulns) {
     if (!resultArray.length) {
       continue; // Skip arrays and non-object items
     }
@@ -215,15 +232,14 @@ function extractWebsiteFromResult(data) {
   return null; // Return null if no website is found
 }
 
-
 function reorderDetails(details) {
   return details.sort((a, b) => {
-    if (a.parentCategory === 'Other' && b.parentCategory !== 'Other') {
-      return 1; // Move items with parentCategory 'Other' to the end
-    } else if (a.parentCategory !== 'Other' && b.parentCategory === 'Other') {
+    if (a.category === "Other" && b.category !== "Other") {
+      return 1; // Move items with category 'Other' to the end
+    } else if (a.category !== "Other" && b.category === "Other") {
       return -1; // Keep other items in their original order
     } else {
-      return 0; // No change in order for items with the same parentCategory
+      return 0; // No change in order for items with the same category
     }
   });
 }
@@ -231,3 +247,22 @@ function reorderDetails(details) {
 app.listen(port, () => {
   console.log(`Hello world! App running on port ${port}.`);
 });
+
+function addConnectionVulnToDetails(details, sslyzeResults) {
+  const allTrueSslyze = Object.keys(sslyzeResults).filter(
+    (key) => sslyzeResults[key] === true
+  );
+  delete allTrueSslyze.tls2;
+  delete allTrueSslyze.hsts;
+
+  allTrueSslyze
+    .filter((vuln) => vuln !== "hsts")
+    .forEach((sslyzeVuln) => {
+      details.push({
+        info: [connectionVulnInfo[sslyzeVuln]],
+        title: sslyzeVuln,
+        category: "Connection",
+        level: 1,
+      });
+    });
+}

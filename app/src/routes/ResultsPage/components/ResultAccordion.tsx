@@ -68,7 +68,7 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
         >
           <Stack direction="row" alignItems={"center"}>
             <Typography css={accordionTitleTextStyle}>
-              {result.category}
+              {result.title}
             </Typography>
             {result.level === 2 && (
               <Typography css={accordionMediumSeverityTextStyle}>

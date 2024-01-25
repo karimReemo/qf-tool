@@ -26,7 +26,7 @@ const ScoreCircle: React.FunctionComponent<IScoreCircleProps> = ({
       <CircularProgressBar
         id={id}
         linearGradient={linearGradient}
-        percent={score}
+        percent={Math.ceil(score)}
         speed={80}
         colorSlice="#190ae4"
         colorCircle="#f1f1f1"
