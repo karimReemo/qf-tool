@@ -25,7 +25,8 @@ export interface ScoreDetails {
 }
 
 export interface IScoreResponse {
-  website:string
+  website:string;
+  testDate:string;
   "connection-score": number;
   "website-score": number;
   "average-score": number;

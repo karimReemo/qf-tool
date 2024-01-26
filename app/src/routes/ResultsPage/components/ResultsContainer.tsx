@@ -13,9 +13,11 @@ import { ScoreDetails } from "../../../utils/types";
 import ResultAccordion from "./ResultAccordion";
 import { mq, primaryColor } from "../../../assets/global-styles";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { Options, usePDF } from "react-to-pdf";
 
 interface IResultsContainerProps {
   results: ScoreDetails[] | undefined;
+  toPDF: (options?: Options | undefined) => void;
 }
 
 interface ICategoryDef {
@@ -25,7 +27,12 @@ interface ICategoryDef {
 
 const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
   results,
+  toPDF,
 }) => {
+  //State to control the expanding of all accordions to take a screenshot
+  const [exapndAllAccordions, setExapndAllAccordions] =
+    React.useState<boolean>(false);
+
   const xlargeScreen = useMediaQuery(mq["xl"]);
   const allCategories: ICategoryDef[] | undefined = results?.map((result) => {
     return { category: result.category, categoryInfo: result.categoryInfo };
@@ -47,6 +54,16 @@ const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
     },
     []
   );
+
+  const downloadPDF = () => {
+    setExapndAllAccordions(true);
+    // Introduce a delay of one second before collapsing the accordions
+    setTimeout(() => {
+      toPDF();
+      setExapndAllAccordions(false);
+    }, 1000);
+  };
+
   return (
     <Stack css={rootStyle}>
       <Stack
@@ -57,12 +74,12 @@ const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
         <Typography variant="h5" css={titleStyle}>
           {resultsPageStrings.inDepthSectionTitle}
         </Typography>
-        <Tooltip title="Coming Soon...">
+        <Tooltip title="Download Test Results as pdf">
           <Button
             size={xlargeScreen ? "medium" : "large"}
             endIcon={<DownloadIcon />}
             variant="outlined"
-            onClick={() => alert("Coming Soon...")}
+            onClick={downloadPDF}
           >
             {resultsPageStrings.downloadPDF}
           </Button>
@@ -82,7 +99,11 @@ const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
               (filteredResult) => filteredResult.category === category.category
             )
             .map((result) => (
-              <ResultAccordion key={index} result={result} />
+              <ResultAccordion
+                expandedByDefault={exapndAllAccordions}
+                key={index}
+                result={result}
+              />
             ))}
         </div>
       ))}

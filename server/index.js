@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const { v4: uuidv4, validate: validateUuid } = require("uuid");
 const { exec } = require("child_process");
 const connectionVulnInfo = require("./sslyzeVulnInfo");
-const wapitiVulnInfo=require("./wapitiVulnInfo")
+const wapitiVulnInfo = require("./wapitiVulnInfo");
 const pgp = require("pg-promise")();
 var cors = require("cors");
 
@@ -57,7 +57,7 @@ app.post("/run-test", (req, res) => {
     const url = new URL(website);
     const domain = url.hostname;
 
-    console.log(domain)
+    console.log(domain);
 
     exec(
       `python3 ~/SharqScan/SharqScan.py ${uuid}  ${domain}`,
@@ -91,6 +91,8 @@ app.get("/results/:uuid", async (req, res) => {
       "SELECT * FROM wapiti WHERE uuid = $1",
       uuid
     );
+
+    console.log(wapitiResults);
     if (ssylyzeResults && wapitiResults) {
       const parsedResults = parseResults(ssylyzeResults, wapitiResults);
       res.status(200).json(parsedResults);
@@ -108,13 +110,15 @@ function parseResults(ssylyzeResults, wapitiResults) {
   const details = parseWapitiResults(wapitiResults);
 
   const connectionScore = getConnectionScore(ssylyzeResults);
+  const websiteSecurityScore = getWebsiteSecurityScore(details);
 
   addConnectionVulnToDetails(details, ssylyzeResults);
 
-  const websiteSecurityScore = getWebsiteSecurityScore(details);
+  const testDate = getTestDate(wapitiResults);
 
   return {
     website: extractWebsiteFromResult(wapitiResults),
+    testDate:testDate,
     "connection-score": connectionScore,
     "website-score": websiteSecurityScore,
     "average-score": (connectionScore + websiteSecurityScore) / 2,
@@ -128,21 +132,32 @@ function parseWapitiResults(data) {
     const parsedData = typeof data === "string" ? JSON.parse(data) : data;
 
     // Check if "record" exists and has the expected structure
-    if (  parsedData && parsedData.vulns.vulnerabilities) {
-      let vulnsObject=parsedData.vulns.vulnerabilities
+    if (parsedData && parsedData.vulns.vulnerabilities) {
+      let vulnsObject = parsedData.vulns.vulnerabilities;
       // Extract "info" and "level" from each vulnerability, and add their title.
-      const extractedInfoLevel =Object.entries(vulnsObject).reduce((acc, [vulnCategory,vulnInfo]) => {
-        if (Array.isArray(vulnInfo)) {
-          vulnInfo.forEach(({ info, level }) => {
-            if (info !== undefined && level !== undefined) {
-              //The first word of the info is used as the title
-              const title = info.split(" ")[0];
-              acc.push({ info, level, title,category:vulnCategory,categoryInfo:wapitiVulnInfo[vulnCategory]});
-            }
-          });
-        }
-        return acc;
-      }, []);
+      const extractedInfoLevel = Object.entries(vulnsObject).reduce(
+        (acc, [vulnCategory, vulnInfo]) => {
+          if (Array.isArray(vulnInfo)) {
+            vulnInfo.forEach(({ info, level }) => {
+              if (info !== undefined && level !== undefined) {
+                //The first word of the info is used as the title
+                const title = info.split(" ")[0];
+                //Ignore HTTP Secure headers as they are laid out in the sslyze results
+                if (vulnCategory !== "HTTP Secure Headers")
+                  acc.push({
+                    info,
+                    level,
+                    title,
+                    category: vulnCategory,
+                    categoryInfo: wapitiVulnInfo[vulnCategory],
+                  });
+              }
+            });
+          }
+          return acc;
+        },
+        []
+      );
       const combinedCategories = combineCategories(extractedInfoLevel);
       return combinedCategories;
     } else {
@@ -177,7 +192,7 @@ function combineCategories(detailsArray) {
     const info = detailsArray[i].info;
     const level = detailsArray[i].level;
     const category = detailsArray[i].category;
-    const categoryInfo=detailsArray[i].categoryInfo
+    const categoryInfo = detailsArray[i].categoryInfo;
 
     const combinedCategoryVuln = combinedCategories.find(
       (vulnDetail) => vulnDetail.category == category
@@ -190,26 +205,15 @@ function combineCategories(detailsArray) {
         title,
         category,
         level,
-        categoryInfo
+        categoryInfo,
       });
   }
   return reorderDetails(combinedCategories);
 }
 
-function getParentCategory(title) {
-  switch (title) {
-    case "CSP":
-      return "Security";
-    case "X-XSS-Protection":
-      return "Cookies";
-    default:
-      return "Other";
-  }
-}
-
 function extractWebsiteFromResult(data) {
-  let vulnsObject=data.vulns.vulnerabilities
-  const extractedVulns =Object.values(vulnsObject)
+  let vulnsObject = data.vulns.vulnerabilities;
+  const extractedVulns = Object.values(vulnsObject);
 
   for (const resultArray of extractedVulns) {
     if (!resultArray.length) {
@@ -256,13 +260,24 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
   delete allTrueSslyze.hsts;
 
   allTrueSslyze
-    .filter((vuln) => vuln !== "hsts")
+    .filter((vuln) => vuln !== "hsts" && vuln !== "tls3")
     .forEach((sslyzeVuln) => {
       details.push({
         info: [connectionVulnInfo[sslyzeVuln]],
         title: sslyzeVuln,
         category: "Connection",
+        categoryInfo: "HTTP Secure Headers' vulnerabilities.",
         level: 1,
       });
     });
 }
+
+const getTestDate = (wapitiResults) => {
+  const parsedData = typeof wapitiResults === "string" ? JSON.parse(wapitiResults) : wapitiResults;
+  // Check if "record" exists and has the expected structure
+  if (parsedData && parsedData.vulns.infos) {
+    let infoObject = parsedData.vulns.infos;
+    return infoObject.date.slice(0, -6);
+  }
+  return null;
+};

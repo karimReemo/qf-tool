@@ -9,10 +9,11 @@ import { resultsPageStrings } from "../../../utils/constants";
 import { mq } from "../../../assets/global-styles";
 
 interface IResultsHeaderProps {
-  website:string
+  website:string;
+  date:string
 }
 
-const ResultsHeader: React.FunctionComponent<IResultsHeaderProps> = ({website}) => {
+const ResultsHeader: React.FunctionComponent<IResultsHeaderProps> = ({website,date}) => {
   return (
     <Stack justifyContent={'space-between'} css={rootStyle} direction={"row"} >
       <Stack justifyContent={"center"} gap={1}>
@@ -24,7 +25,7 @@ const ResultsHeader: React.FunctionComponent<IResultsHeaderProps> = ({website}) 
         </Typography>
         <Typography css={dateStyle}>{`${
           resultsPageStrings.reportDate
-        } ${new Date().toLocaleDateString("en-US")}`}</Typography>
+        } ${date}`}</Typography>
       </Stack>
       <img css={iconStyle} src={resultsHeaderIcon} alt="Reults_Icon" />
     </Stack>

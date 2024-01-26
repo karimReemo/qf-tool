@@ -10,6 +10,7 @@ import { IScore, IScoreResponse, ITestResults } from "../../utils/types";
 import { useLocation } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { apiBaseURL } from "../../utils/api";
+import { usePDF } from "react-to-pdf";
 
 function useQuery() {
   const { search } = useLocation();
@@ -19,7 +20,8 @@ function useQuery() {
 const ResultsPage = () => {
   const [resultsLoading, setResultsLoading] = React.useState(false);
   const [testResults, setTestResults] = React.useState<IScoreResponse>();
-
+  const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
+  
   let query = useQuery();
 
   React.useEffect(() => {
@@ -52,14 +54,14 @@ const ResultsPage = () => {
 
   if (!testResults) return null;
   return (
-    <>
-      <ResultsHeader  website={testResults.website}/>
+    <div   ref={targetRef}>
+      <ResultsHeader date={testResults.testDate} website={testResults.website}/>
       <Stack direction={"column"} gap={3} css={resultsPageRoot}>
         <ScoresContainer scores={overallScores} />
         <Divider />
-        <ResultsContainer results={testResults?.details} />
+        <ResultsContainer toPDF={toPDF} results={testResults?.details} />
       </Stack>
-    </>
+    </div>
   );
 };
 

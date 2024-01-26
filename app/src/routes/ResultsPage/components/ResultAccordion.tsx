@@ -12,12 +12,15 @@ import { resultsPageStrings } from "../../../utils/constants";
 
 interface IResultAccordionProps {
   result: ScoreDetails;
+  expandedByDefault:boolean
 }
 
 const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
   result,
+  expandedByDefault
 }) => {
-  const [expanded, setExpanded] = React.useState<boolean>(false);
+  const [expanded, setExpanded] = React.useState<boolean>(expandedByDefault||false);
+  console.log("Accorfion re rendered: ",expandedByDefault,expanded)
 
   const accordionTitleStyle = css`
     background-color: ${expanded ? "#EBEBEB" : "white"};
@@ -49,6 +52,10 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
       console.log("isExpaned: ", isExpanded);
       setExpanded(isExpanded ? true : false);
     };
+
+    React.useEffect(()=>{
+      setExpanded(expandedByDefault)
+    },[expandedByDefault])
 
   return (
     <div>
