@@ -20,7 +20,7 @@ function useQuery() {
 const ResultsPage = () => {
   const [resultsLoading, setResultsLoading] = React.useState(false);
   const [testResults, setTestResults] = React.useState<IScoreResponse>();
-  const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
+  const { toPDF, targetRef } = usePDF({filename: 'security-report.pdf'});
   
   let query = useQuery();
 

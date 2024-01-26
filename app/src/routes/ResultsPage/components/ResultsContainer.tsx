@@ -61,7 +61,7 @@ const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
     setExapndAllAccordions(true);
     // Introduce a delay of one second before collapsing the accordions
     setTimeout(() => {
-      toPDF({filename: `${website}-security-report`});
+      toPDF();
       setExapndAllAccordions(false);
     }, 1000);
   };
