@@ -78,7 +78,7 @@ export const loadingPageStrings = {
   copyLink: `Copy link`,
 };
 
-export const expectationsSectionHeader = `Here's what you can expect:'`;
+export const expectationsSectionHeader = `Here's what you can expect:`;
 
 export const reportExpectationsStrings = [
   {
