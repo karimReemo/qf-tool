@@ -59,7 +59,7 @@ const ResultsPage = () => {
       <Stack direction={"column"} gap={3} css={resultsPageRoot}>
         <ScoresContainer scores={overallScores} />
         <Divider />
-        <ResultsContainer toPDF={toPDF} results={testResults?.details} />
+        <ResultsContainer  website={testResults.website} toPDF={toPDF} results={testResults?.details} />
       </Stack>
     </div>
   );

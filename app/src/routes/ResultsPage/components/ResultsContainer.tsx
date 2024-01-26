@@ -18,6 +18,7 @@ import { Options, usePDF } from "react-to-pdf";
 interface IResultsContainerProps {
   results: ScoreDetails[] | undefined;
   toPDF: (options?: Options | undefined) => void;
+  website:string
 }
 
 interface ICategoryDef {
@@ -28,6 +29,7 @@ interface ICategoryDef {
 const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
   results,
   toPDF,
+  website
 }) => {
   //State to control the expanding of all accordions to take a screenshot
   const [exapndAllAccordions, setExapndAllAccordions] =
@@ -59,7 +61,7 @@ const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
     setExapndAllAccordions(true);
     // Introduce a delay of one second before collapsing the accordions
     setTimeout(() => {
-      toPDF();
+      toPDF({filename: `${website}-security-report`});
       setExapndAllAccordions(false);
     }, 1000);
   };
