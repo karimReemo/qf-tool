@@ -18,27 +18,37 @@ import { Options, usePDF } from "react-to-pdf";
 interface IResultsContainerProps {
   results: ScoreDetails[] | undefined;
   toPDF: (options?: Options | undefined) => void;
-  website:string
+  website: string;
 }
 
 interface ICategoryDef {
   category: string;
   categoryInfo?: string;
+  categoryLevel: number;
 }
 
 const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
   results,
   toPDF,
-  website
+  website,
 }) => {
   //State to control the expanding of all accordions to take a screenshot
   const [exapndAllAccordions, setExapndAllAccordions] =
     React.useState<boolean>(false);
 
   const xlargeScreen = useMediaQuery(mq["xl"]);
-  const allCategories: ICategoryDef[] | undefined = results?.map((result) => {
-    return { category: result.category, categoryInfo: result.categoryInfo };
-  });
+  //Sort vulns by level
+  const sortedVulnerabilities = results?.sort((a, b) => b.level - a.level);
+
+  const allCategories: ICategoryDef[] | undefined = sortedVulnerabilities?.map(
+    (result) => {
+      return {
+        category: result.category,
+        categoryInfo: result.categoryInfo,
+        categoryLevel: result.level,
+      };
+    }
+  );
   // Create a unique set of categories based on the category property
   const uniqueCategories: ICategoryDef[] | undefined = allCategories?.reduce(
     (unique, currentCategory) => {
@@ -89,7 +99,7 @@ const ResultsContainer: React.FunctionComponent<IResultsContainerProps> = ({
       </Stack>
       {uniqueCategories?.map((category, index) => (
         <div css={{ marginBottom: "2em" }}>
-          <div css={categoryContainerStyle}>
+          <div css={category.categoryLevel==0?noVulnCatgeoryStyle:categoryContainerStyle}>
             <Typography css={categoryStyle}>{category.category}</Typography>
             <Tooltip title={`${category.categoryInfo}`} arrow>
               <InfoOutlinedIcon />
@@ -134,8 +144,10 @@ const categoryStyle = css`
   font-family: "ZawyaNormal";
 `;
 
+
+
 const categoryContainerStyle = css`
-  background-color: ${primaryColor};
+  background-color: #870101;
   padding: 4px 8px;
 
   border-radius: 4px;
@@ -144,6 +156,11 @@ const categoryContainerStyle = css`
   gap: 12px;
   width: fit-content;
   color: #ffffff;
+`;
+
+const noVulnCatgeoryStyle = css`
+  ${categoryContainerStyle};
+  background-color: #03a803;
 `;
 
 export default ResultsContainer;

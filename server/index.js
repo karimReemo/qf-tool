@@ -57,8 +57,6 @@ app.post("/run-test", (req, res) => {
     const url = new URL(website);
     const domain = url.hostname;
 
-    console.log(domain);
-
     exec(
       `python3 ~/SharqScan/SharqScan.py ${uuid}  ${domain}`,
       (error, stdout, stderr) => {
@@ -92,7 +90,6 @@ app.get("/results/:uuid", async (req, res) => {
       uuid
     );
 
-    console.log(wapitiResults);
     if (ssylyzeResults && wapitiResults) {
       const parsedResults = parseResults(ssylyzeResults, wapitiResults);
       res.status(200).json(parsedResults);
@@ -118,7 +115,7 @@ function parseResults(ssylyzeResults, wapitiResults) {
 
   return {
     website: extractWebsiteFromResult(wapitiResults),
-    testDate:testDate,
+    testDate: testDate,
     "connection-score": connectionScore,
     "website-score": websiteSecurityScore,
     "average-score": (connectionScore + websiteSecurityScore) / 2,
@@ -137,7 +134,8 @@ function parseWapitiResults(data) {
       // Extract "info" and "level" from each vulnerability, and add their title.
       const extractedInfoLevel = Object.entries(vulnsObject).reduce(
         (acc, [vulnCategory, vulnInfo]) => {
-          if (Array.isArray(vulnInfo)) {
+          //Vulnerability found for that category
+          if (Array.isArray(vulnInfo) && vulnInfo.length) {
             vulnInfo.forEach(({ info, level }) => {
               if (info !== undefined && level !== undefined) {
                 //The first word of the info is used as the title
@@ -152,6 +150,16 @@ function parseWapitiResults(data) {
                     categoryInfo: wapitiVulnInfo[vulnCategory],
                   });
               }
+            });
+          }
+          //No Vulnerabilities found for that category
+          else {
+           acc.push({
+              info:null,
+              level:0,
+              title: `No ${vulnCategory} vulnerabilities were found`,
+              category: vulnCategory,
+              categoryInfo: [],
             });
           }
           return acc;
@@ -170,6 +178,7 @@ function parseWapitiResults(data) {
 }
 
 function getConnectionScore(ssylyzeResults) {
+  console.log(ssylyzeResults)
   if (ssylyzeResults.tls2 === false) {
     if (ssylyzeResults.tls3 && ssylyzeResults.hsts) return 100;
     if (ssylyzeResults.tls3 && !ssylyzeResults.hsts) return 80;
@@ -180,8 +189,11 @@ function getConnectionScore(ssylyzeResults) {
 }
 
 function getWebsiteSecurityScore(parsedWapiti) {
-  if (parsedWapiti.length > 9) return 0;
-  return 100 - parsedWapiti.length * 5;
+  //Only account for vuln with level>0
+  const vulnCount=parsedWapiti.filter(vuln=>vuln.level).length 
+  console.log(parsedWapiti)
+  if (vulnCount> 9) return 0;
+  return 100 - vulnCount * 5;
 }
 
 /**Function that searches through the details and combine the vuln that have the same title */
@@ -248,10 +260,9 @@ function reorderDetails(details) {
   });
 }
 
-app.listen(port, () => {
-  console.log(`Hello world! App running on port ${port}.`);
-});
-
+/** Takes in the sslyze test data and creates a detail object out of each one
+ * and adds it to the "details" array returned in the response
+ */
 function addConnectionVulnToDetails(details, sslyzeResults) {
   const allTrueSslyze = Object.keys(sslyzeResults).filter(
     (key) => sslyzeResults[key] === true
@@ -264,7 +275,7 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
     .forEach((sslyzeVuln) => {
       details.push({
         info: [connectionVulnInfo[sslyzeVuln]],
-        title: sslyzeVuln,
+        title: formatSslyzeName(sslyzeVuln),
         category: "Connection",
         categoryInfo: "HTTP Secure Headers' vulnerabilities.",
         level: 1,
@@ -272,8 +283,14 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
     });
 }
 
+/** Gets the date that the test has run on from the wapiti results and returns it
+ * in the response
+ */
 const getTestDate = (wapitiResults) => {
-  const parsedData = typeof wapitiResults === "string" ? JSON.parse(wapitiResults) : wapitiResults;
+  const parsedData =
+    typeof wapitiResults === "string"
+      ? JSON.parse(wapitiResults)
+      : wapitiResults;
   // Check if "record" exists and has the expected structure
   if (parsedData && parsedData.vulns.infos) {
     let infoObject = parsedData.vulns.infos;
@@ -281,3 +298,22 @@ const getTestDate = (wapitiResults) => {
   }
   return null;
 };
+
+const formatSslyzeName = (sslyzeVuln) => {
+  switch (sslyzeVuln.toLowerCase()) {
+    case "tls1":
+      return "TLS 1.1";
+    case "tls2":
+      return "TLS 1.2";
+    case "tls0":
+      return "TLS 1.0";
+    case "tls3":
+      return "TLS 1.3";
+    default:
+      return sslyzeVuln;
+  }
+};
+
+app.listen(port, () => {
+  console.log(`Hello world! App running on port ${port}.`);
+});

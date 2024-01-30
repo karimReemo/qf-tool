@@ -12,15 +12,18 @@ import { resultsPageStrings } from "../../../utils/constants";
 
 interface IResultAccordionProps {
   result: ScoreDetails;
-  expandedByDefault:boolean
+  expandedByDefault: boolean;
 }
 
 const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
   result,
-  expandedByDefault
+  expandedByDefault,
 }) => {
-  const [expanded, setExpanded] = React.useState<boolean>(expandedByDefault||false);
-  console.log("Accorfion re rendered: ",expandedByDefault,expanded)
+  const [expanded, setExpanded] = React.useState<boolean>(
+    expandedByDefault || false
+  );
+
+  const noVulnInCatgeory = result.level === 0;
 
   const accordionTitleStyle = css`
     background-color: ${expanded ? "#EBEBEB" : "white"};
@@ -29,7 +32,6 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
     ${mq["xl"]} {
       height: 50px;
     }
-  
   `;
 
   const accordionTitleTextStyle = css`
@@ -39,23 +41,21 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
     ${mq["xl"]} {
       font-size: 1.1em;
     }
-    
   `;
 
   const accordionBodyStyle = css`
     background-color: ${expanded ? "#EBEBEB" : "white"};
-    padding-left:0;
+    padding-left: 0;
   `;
 
   const handleChange =
     () => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      console.log("isExpaned: ", isExpanded);
-      setExpanded(isExpanded ? true : false);
+      if (!noVulnInCatgeory) setExpanded(isExpanded ? true : false);
     };
 
-    React.useEffect(()=>{
-      setExpanded(expandedByDefault)
-    },[expandedByDefault])
+  React.useEffect(() => {
+    setExpanded(expandedByDefault);
+  }, [expandedByDefault]);
 
   return (
     <div>
@@ -89,13 +89,17 @@ const ResultAccordion: React.FunctionComponent<IResultAccordionProps> = ({
             )}
           </Stack>
         </AccordionSummary>
-        <AccordionDetails css={accordionBodyStyle}>
-          <ul css={listStyle}>
-            {result.info.map((item, index) => (
-              <li key={index} style={{ marginBottom: '4px' }}><Typography css={accordionBodyTextStyle}>{item}</Typography></li>
-            ))}
-          </ul>
-        </AccordionDetails>
+        {!noVulnInCatgeory && (
+          <AccordionDetails css={accordionBodyStyle}>
+            <ul css={listStyle}>
+              {result.info.map((item, index) => (
+                <li key={index} style={{ marginBottom: "4px" }}>
+                  <Typography css={accordionBodyTextStyle}>{item}</Typography>
+                </li>
+              ))}
+            </ul>
+          </AccordionDetails>
+        )}
       </Accordion>
     </div>
   );
@@ -123,8 +127,8 @@ const accordionBodyTextStyle = css`
   }
 `;
 
-const listStyle= css`
-  margin:0;
+const listStyle = css`
+  margin: 0;
   margin-left: -6px;
-`
+`;
 export default ResultAccordion;
