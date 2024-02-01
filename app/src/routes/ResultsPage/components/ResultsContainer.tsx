@@ -147,7 +147,7 @@ const categoryStyle = css`
 
 
 const categoryContainerStyle = css`
-  background-color: #870101;
+  background-color: #bb0303;
   padding: 4px 8px;
 
   border-radius: 4px;
