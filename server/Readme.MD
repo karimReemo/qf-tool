@@ -19,6 +19,7 @@ Follow these steps to deploy the project:
 *Explanation*
 - I have set up a pm2 instance serving the BE, When you execute `pm2 list`, you will see:
 
+
 ### Notes
 - All security calculations and details are handled by the backend.
 - There are mainly two endpoints
