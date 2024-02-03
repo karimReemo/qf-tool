@@ -17,7 +17,7 @@ Follow these steps to deploy the project:
 4. Your changes are now live!
 
 *Explanation*
-- I have set up a pm2 instance serving the BE, When you execute `pm2 list`, you will see:
+- I have set up a pm2 instance serving the BE, When you execute `pm2 list`, you will see an instance with id=1 serving an "index" file, that is the backend.
 
 
 ### Notes
