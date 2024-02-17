@@ -1,0 +1,11 @@
+
+*.vsidx
+.vs/qf-tool/v17/.wsuo
+.vs/VSWorkspaceState.json
+app/.vs/app/v17/.wsuo
+app/.vs/VSWorkspaceState.json
+server/.vs/server/v17/.wsuo
+server/.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+app/.vs/slnx.sqlite
+server/.vs/slnx.sqlite

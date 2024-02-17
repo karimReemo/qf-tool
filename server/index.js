@@ -178,14 +178,14 @@ function parseWapitiResults(data) {
 }
 
 function getConnectionScore(ssylyzeResults) {
-  console.log(ssylyzeResults)
-  if (ssylyzeResults.tls2 === false) {
-    if (ssylyzeResults.tls3 && ssylyzeResults.hsts) return 100;
-    if (ssylyzeResults.tls3 && !ssylyzeResults.hsts) return 80;
-  } else {
-    if (ssylyzeResults.hsts) return 70;
-    if (!ssylyzeResults.hsts) return 50;
-  }
+    console.log(ssylyzeResults)
+    if (sslyzeResults.ssl2) { return 0; }
+    else if (sslyzeResults.ssl3) { return 0; }
+    else if (sslyzeResults.tls0) { return 0; }
+    else if (sslyzeResults.tls1) { return 10; }
+    else if (sslyzeResults.tls2) { return 50; }
+    else if (!sslyzeResults.hsts) { return 50; }
+    else { return 100; }
 }
 
 function getWebsiteSecurityScore(parsedWapiti) {
