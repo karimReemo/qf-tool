@@ -147,11 +147,11 @@ function parseWapitiResults(data) {
                       const vulnAdvice = extraVulnInfo[vulnCategory] || [];
                       const bulletInfo = [info, vulnAdvice];
                       acc.push({
-                          bulletInfo,
+                          info: bulletInfo,
                           level,
                           title,
                           category: vulnCategory,
-                          vulnInfo,
+                          categoryInfo: vulnInfo,
                       });
                   }
               }
@@ -282,7 +282,7 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
         details.push({
             title: formatSslyzeName(vulnerability),
             category: "Connection",
-            info: [vulnAdvice],
+            info: ["Dit bepaalt de beveiliging van de verbinding tussen een klant en uw website."],
             level: 1,
             categoryInfo: vulnInfo,
         });
