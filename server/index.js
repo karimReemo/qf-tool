@@ -276,19 +276,15 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
     );
 
     allTrueSslyze.forEach(vulnerability => {
-        // Combine Info and Advice
         const vulnInfo = connectionVulnInfo[vulnerability] ? [connectionVulnInfo[vulnerability]] : [];
         const vulnAdvice = extraVulnInfo[vulnerability] || [];
-        const categoryInfo = [vulnInfo, vulnAdvice];
-   
-        // Push the combined information into the details array.
-        // Info is the name of the thing
+
         details.push({
             title: formatSslyzeName(vulnerability),
             category: "Connection",
-            info: [connectionVulnInfo[vulnerability]],
+            info: vulnAdvice,
             level: 1,
-            categoryInfo: categoryInfo,
+            vulnInfo,
         });
     });
 }
