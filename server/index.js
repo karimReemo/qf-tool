@@ -139,6 +139,7 @@ function parseWapitiResults(data) {
                                 if (vulnCategory !== "HTTP Secure Headers") {
                                     const vulnInfo = wapitiVulnInfo[vulnCategory] || [];
                                     const vulnAdvice = extraVulnInfo[vulnCategory] || [];
+                                    const hackSolution = info;
                                     info.push(vulnAdvice);
                                     acc.push({
                                         info,
@@ -147,6 +148,7 @@ function parseWapitiResults(data) {
                                         category: vulnCategory,
                                         categoryInfo: vulnInfo,
                                     });
+                                    info = hackSolution;
                                 }
                             }
                         });
