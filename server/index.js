@@ -276,7 +276,7 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
     );
 
     allTrueSslyze.forEach(vulnerability => {
-        const vulnInfo = connectionVulnInfo[vulnerability];
+        const vulnInfo = [connectionVulnInfo[vulnerability]];
         const vulnAdvice = extraVulnInfo[vulnerability] || [];
 
         details.push({
