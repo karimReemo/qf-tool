@@ -183,7 +183,7 @@ function parseWapitiResults(data) {
 }
 
 function getConnectionScore(sslyzeResults) {
-    console.log(ssylyzeResults)
+    console.log(sslyzeResults)
     if (sslyzeResults.ssl2) { return 0; }
     else if (sslyzeResults.ssl3) { return 0; }
     else if (sslyzeResults.tls0) { return 0; }
