@@ -4,6 +4,7 @@ const { v4: uuidv4, validate: validateUuid } = require("uuid");
 const { exec } = require("child_process");
 const connectionVulnInfo = require("./sslyzeVulnInfo");
 const wapitiVulnInfo = require("./wapitiVulnInfo");
+const extraVulnInfo = require("./extraVulnInfo");
 const pgp = require("pg-promise")();
 var cors = require("cors");
 
@@ -141,14 +142,18 @@ function parseWapitiResults(data) {
                 //The first word of the info is used as the title
                 const title = info.split(" ")[0];
                 //Ignore HTTP Secure headers as they are laid out in the sslyze results
-                if (vulnCategory !== "HTTP Secure Headers")
-                  acc.push({
-                    info,
-                    level,
-                    title,
-                    category: vulnCategory,
-                    categoryInfo: wapitiVulnInfo[vulnCategory],
-                  });
+                  if (vulnCategory !== "HTTP Secure Headers") {
+                      const vulnInfo = wapitiVulnInfo[vulnCategory] || [];
+                      const vulnAdvice = extraVulnInfo[vulnCategory] || [];
+                      const categoryInfo = vulnInfo.concat(vulnAdvice);
+                      acc.push({
+                          info,
+                          level,
+                          title,
+                          category: vulnCategory,
+                          categoryInfo,
+                      });
+                  }
               }
             });
           }
@@ -262,24 +267,29 @@ function reorderDetails(details) {
 
 /** Takes in the sslyze test data and creates a detail object out of each one
  * and adds it to the "details" array returned in the response
+ * 
+ * Not including TLS2 apparently?
  */
 function addConnectionVulnToDetails(details, sslyzeResults) {
-  const allTrueSslyze = Object.keys(sslyzeResults).filter(
-    (key) => sslyzeResults[key] === true
-  );
-  delete allTrueSslyze.tls2;
-  delete allTrueSslyze.hsts;
+    const allTrueSslyze = Object.keys(sslyzeResults).filter(
+        key => sslyzeResults[key] === true && key !== 'tls3' && key !== 'hsts'
+    );
 
-  allTrueSslyze
-    .filter((vuln) => vuln !== "hsts" && vuln !== "tls3")
-    .forEach((sslyzeVuln) => {
-      details.push({
-        info: [connectionVulnInfo[sslyzeVuln]],
-        title: formatSslyzeName(sslyzeVuln),
-        category: "Connection",
-        categoryInfo: "HTTP Secure Headers' vulnerabilities.",
-        level: 1,
-      });
+    allTrueSslyze.forEach(vulnerability => {
+        // Combine Info and Advice
+        const vulnInfo = connectionVulnInfo[vulnerability] ? [connectionVulnInfo[vulnerability]] : [];
+        const vulnAdvice = extraVulnInfo[vulnerability] || [];
+        const categoryInfo = vulnInfo.concat(vulnAdvice);
+   
+        // Push the combined information into the details array.
+        // Info is the name of the thing
+        details.push({
+            title: formatSslyzeName(vulnerability),
+            category: "Connection",
+            info: [connectionVulnInfo[vulnerability]],
+            level: 1,
+            categoryInfo: categoryInfo,
+        });
     });
 }
 
