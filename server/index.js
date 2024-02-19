@@ -282,9 +282,9 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
         details.push({
             title: formatSslyzeName(vulnerability),
             category: "Connection",
-            info: vulnAdvice,
+            info: [vulnAdvice],
             level: 1,
-            vulnInfo,
+            vulnInfo: [vulnInfo],
         });
     });
 }
