@@ -276,7 +276,7 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
     );
 
     allTrueSslyze.forEach(vulnerability => {
-        const vulnInfo = connectionVulnInfo[vulnerability] ? [connectionVulnInfo[vulnerability]] : [];
+        const vulnInfo = connectionVulnInfo[vulnerability];
         const vulnAdvice = extraVulnInfo[vulnerability] || [];
 
         details.push({
@@ -284,7 +284,7 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
             category: "Connection",
             info: [vulnAdvice],
             level: 1,
-            vulnInfo: [vulnInfo],
+            vulnInfo,
         });
     });
 }
