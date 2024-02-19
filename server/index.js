@@ -145,7 +145,7 @@ function parseWapitiResults(data) {
                   if (vulnCategory !== "HTTP Secure Headers") {
                       const vulnInfo = [wapitiVulnInfo[vulnCategory]] || [];
                       const vulnAdvice = extraVulnInfo[vulnCategory] || [];
-                      const bulletInfo = [info, vulnAdvice];
+                      const bulletInfo = [[info], [vulnAdvice]];
                       acc.push({
                           info: bulletInfo,
                           level,
@@ -282,9 +282,9 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
         details.push({
             title: formatSslyzeName(vulnerability),
             category: "Connection",
-            info: ["Dit bepaalt de beveiliging van de verbinding tussen een klant en uw website."],
+            info: [vulnAdvice, vulnInfo],
             level: 1,
-            categoryInfo: vulnInfo,
+            categoryInfo: "De beveiliging van de verbinding tussen een klant en uw website.",
         });
     });
 }
