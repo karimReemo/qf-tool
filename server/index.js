@@ -125,61 +125,45 @@ function parseResults(ssylyzeResults, wapitiResults) {
 }
 
 function parseWapitiResults(data) {
-  try {
-    // Parse the data if it's a string
-    const parsedData = typeof data === "string" ? JSON.parse(data) : data;
+    try {
+        const parsedData = typeof data === "string" ? JSON.parse(data) : data;
 
-    // Check if "record" exists and has the expected structure
-    if (parsedData && parsedData.vulns.vulnerabilities) {
-      let vulnsObject = parsedData.vulns.vulnerabilities;
-      // Extract "info" and "level" from each vulnerability, and add their title.
-      const extractedInfoLevel = Object.entries(vulnsObject).reduce(
-        (acc, [vulnCategory, vulnInfo]) => {
-          //Vulnerability found for that category
-          if (Array.isArray(vulnInfo) && vulnInfo.length) {
-            vulnInfo.forEach(({ info, level }) => {
-              if (info !== undefined && level !== undefined) {
-                //The first word of the info is used as the title
-                const title = info.split(" ")[0];
-                //Ignore HTTP Secure headers as they are laid out in the sslyze results
-                  if (vulnCategory !== "HTTP Secure Headers") {
-                      const vulnInfo = [wapitiVulnInfo[vulnCategory]] || [];
-                      const vulnAdvice = extraVulnInfo[vulnCategory] || [];
-                      const info = [info, vulnAdvice];
-                      acc.push({
-                          info,
-                          level,
-                          title,
-                          category: vulnCategory,
-                          categoryInfo: vulnInfo,
-                      });
-                  }
-              }
-            });
-          }
-          //No Vulnerabilities found for that category
-          else {
-           acc.push({
-              info:null,
-              level:0,
-              title: `No ${vulnCategory} vulnerabilities were found`,
-              category: vulnCategory,
-              categoryInfo: [],
-            });
-          }
-          return acc;
-        },
-        []
-      );
-      const combinedCategories = combineCategories(extractedInfoLevel);
-      return combinedCategories;
-    } else {
-      throw new Error("Invalid data structure");
+        if (parsedData && parsedData.vulns.vulnerabilities) {
+            let vulnsObject = parsedData.vulns.vulnerabilities;
+            const extractedInfoLevel = Object.entries(vulnsObject).reduce(
+                (acc, [vulnCategory, vulnDetails]) => { // Avoid shadowing by renaming to vulnDetails
+                    if (Array.isArray(vulnDetails) && vulnDetails.length) {
+                        vulnDetails.forEach(({ info, level }) => {
+                            if (info !== undefined && level !== undefined) {
+                                const title = info.split(" ")[0];
+                                if (vulnCategory !== "HTTP Secure Headers") {
+                                    const vulnInfo = wapitiVulnInfo[vulnCategory] || [];
+                                    const vulnAdvice = extraVulnInfo[vulnCategory] || [];
+                                    const vulnList = [info, ...vulnAdvice]; // Create vulnList with info and vulnAdvice
+                                    acc.push({
+                                        info: vulnList, // Assign vulnList to info
+                                        level,
+                                        title,
+                                        category: vulnCategory,
+                                        categoryInfo: vulnInfo,
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    return acc;
+                },
+                []
+            );
+            const combinedCategories = combineCategories(extractedInfoLevel);
+            return combinedCategories;
+        } else {
+            throw new Error("Invalid data structure");
+        }
+    } catch (error) {
+        console.error("Error parsing data:", error.message);
+        return null;
     }
-  } catch (error) {
-    console.error("Error parsing data:", error.message);
-    return null;
-  }
 }
 
 function getConnectionScore(sslyzeResults) {
