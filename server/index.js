@@ -145,7 +145,7 @@ function parseWapitiResults(data) {
                   if (vulnCategory !== "HTTP Secure Headers") {
                       const vulnInfo = [wapitiVulnInfo[vulnCategory]] || [];
                       const vulnAdvice = extraVulnInfo[vulnCategory] || [];
-                      const bulletInfo = [info, vulnAdvice];
+                      const bulletInfo = [info[0], vulnAdvice[0]];
                       acc.push({
                           info: bulletInfo,
                           level,
@@ -308,9 +308,11 @@ const getTestDate = (wapitiResults) => {
 const formatSslyzeName = (sslyzeVuln) => {
     switch (sslyzeVuln.toLowerCase()) {
     case "dos":
-        return "DOS"
+      return "DOS"
     case "ssl2":
-        return "SSL 2";
+      return "SSL 2";
+    case "ssl3":
+      return "SSL 3";
     case "tls1":
       return "TLS 1.1";
     case "tls2":
