@@ -143,15 +143,15 @@ function parseWapitiResults(data) {
                 const title = info.split(" ")[0];
                 //Ignore HTTP Secure headers as they are laid out in the sslyze results
                   if (vulnCategory !== "HTTP Secure Headers") {
-                      const vulnInfo = wapitiVulnInfo[vulnCategory] || [];
+                      const vulnInfo = [wapitiVulnInfo[vulnCategory]] || [];
                       const vulnAdvice = extraVulnInfo[vulnCategory] || [];
-                      const categoryInfo = [vulnInfo, vulnAdvice];
+                      const bulletInfo = [info, vulnAdvice];
                       acc.push({
-                          info,
+                          bulletInfo,
                           level,
                           title,
                           category: vulnCategory,
-                          categoryInfo,
+                          vulnInfo,
                       });
                   }
               }
@@ -306,7 +306,11 @@ const getTestDate = (wapitiResults) => {
 };
 
 const formatSslyzeName = (sslyzeVuln) => {
-  switch (sslyzeVuln.toLowerCase()) {
+    switch (sslyzeVuln.toLowerCase()) {
+    case "dos":
+        return "DOS"
+    case "ssl2":
+        return "SSL 2";
     case "tls1":
       return "TLS 1.1";
     case "tls2":
