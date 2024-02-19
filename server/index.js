@@ -145,9 +145,9 @@ function parseWapitiResults(data) {
                   if (vulnCategory !== "HTTP Secure Headers") {
                       const vulnInfo = [wapitiVulnInfo[vulnCategory]] || [];
                       const vulnAdvice = extraVulnInfo[vulnCategory] || [];
-                      const bulletInfo = [info[0], vulnAdvice[0]];
+                      const bulletInfo = [info, vulnAdvice];
                       acc.push({
-                          info: bulletInfo,
+                          bulletInfo,
                           level,
                           title,
                           category: vulnCategory,
