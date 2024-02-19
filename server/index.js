@@ -145,7 +145,7 @@ function parseWapitiResults(data) {
                   if (vulnCategory !== "HTTP Secure Headers") {
                       const vulnInfo = wapitiVulnInfo[vulnCategory] || [];
                       const vulnAdvice = extraVulnInfo[vulnCategory] || [];
-                      const categoryInfo = vulnInfo.concat(vulnAdvice);
+                      const categoryInfo = [vulnInfo, vulnAdvice];
                       acc.push({
                           info,
                           level,
@@ -279,7 +279,7 @@ function addConnectionVulnToDetails(details, sslyzeResults) {
         // Combine Info and Advice
         const vulnInfo = connectionVulnInfo[vulnerability] ? [connectionVulnInfo[vulnerability]] : [];
         const vulnAdvice = extraVulnInfo[vulnerability] || [];
-        const categoryInfo = vulnInfo.concat(vulnAdvice);
+        const categoryInfo = [vulnInfo, vulnAdvice];
    
         // Push the combined information into the details array.
         // Info is the name of the thing
