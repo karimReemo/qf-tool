@@ -132,7 +132,7 @@ function parseWapitiResults(data) {
             let vulnsObject = parsedData.vulns.vulnerabilities;
             const extractedInfoLevel = Object.entries(vulnsObject).reduce(
                 (acc, [vulnCategory, vulnDetails]) => { // Avoid shadowing by renaming to vulnDetails
-                    if (Array.isArray(vulnDetails) && vulnDetails.length) {
+                    if (true || Array.isArray(vulnDetails) && vulnDetails.length) {
                         vulnDetails.forEach(({ info, level }) => {
                             if (info !== undefined && level !== undefined) {
                                 const title = info.split(" ")[0];
